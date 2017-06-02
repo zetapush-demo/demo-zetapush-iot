@@ -1,0 +1,25 @@
+/*
+ *	Macroscript called by the smartphone when an Eddystone beacon is detected
+ *	In this case, we call 'addToGDADatabase' to save the beacon in the database and
+ *	we return a message to update the UI
+*/
+macroscript newBeaconDetection(number timestamp, string data, number distance, string device){
+	
+	// Add this user in the detection group user
+	sudo 'IOT' groupManagement.addUser({group : 'detection', user: __userKey});
+
+	// Save the beacon detection in the database
+	call addToGDADatabase({timestamp: timestamp, data: data, distance: distance, device: device});
+	
+	// Build the beacon detection object
+	var res = {
+		'timestamp': timestamp,
+		'data': data,
+		'distance': distance,
+		'device': device
+	};
+	
+	var response = groupManagement.groupUsers({group : 'detection', owner: 'IOT'});
+	
+	
+} broadcast(response.users) { res } on channel __selfName

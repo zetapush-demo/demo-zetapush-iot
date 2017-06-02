@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Service configuration
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <button id=details-services icon-left ion-button round (click)="goToDetails()">
+        <ion-icon name="help-circle"></ion-icon>
+        Services
+    </button>
+
+    <ion-label id=title *ngIf="url">
+        <p>Service configuration of :</p>
+        <p id=title_url>{{url}}</p>
+    </ion-label>
+
+    <ion-label id=serviceLinked>
+        <p>{{textLinkedService}}</p>
+        <p *ngIf=textResLinkedLine>{{textResLinkedLine}}</p>
+    </ion-label>
+
+    <ion-item>
+        <ion-label>Select the service :</ion-label>
+        <ion-select [(ngModel)]="serviceSelected">
+            <ion-option *ngFor="let service of allAvailableServices" [value]= "service.name">{{service.name}}</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <button id=submit ion-button full (click)="submitService()">Submit</button>
+
+</ion-content>

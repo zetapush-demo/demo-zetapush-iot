@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Details of services
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list *ngFor="let service of listBeaconServices">
+
+        <ion-card>
+            <ion-card-header id=service_name>
+            {{service.name}}
+            </ion-card-header>
+
+            <ion-card-content>
+                <p>
+                    <span id=url>URL : </span>
+                    <span>{{service.url}}</span>
+                </p>
+                <p>
+                    <span id=description>Description : </span>
+                    <span>{{service.description}}</span>
+                </p>
+            </ion-card-content>
+        </ion-card>
+
+    </ion-list>
+
+</ion-content>

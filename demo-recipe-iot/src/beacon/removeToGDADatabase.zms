@@ -1,0 +1,21 @@
+/*
+ * Macroscript called to remove a beacon detection to the database
+*/
+macroscript removeToGDADatabase(string device,  string data){
+	
+	// Get the array of beacon detections
+	var getArrayBeaconDetections = database.get({table : 'allBeacons', key : 'allBeacons'});
+	var tabOfBeaconDetections = getArrayBeaconDetections.result.tabBeacons;
+	
+	// Range the tab of beacon detection and delete the correct beacon detection
+	var newTabOfBeaconDetection = [];
+	for b in tabOfBeaconDetections {
+		if (!(b.data == data && b.device == device)){											// It's the proper beacon detection to remove
+			newTabOfBeaconDetection = list:add(newTabOfBeaconDetection, b);
+		}
+	}
+	
+	// Remove the former array and put the new
+	database.put({table : 'allBeacons', data : newTabOfBeaconDetection, key : 'allBeacons', column : 'tabBeacons'});
+		
+}

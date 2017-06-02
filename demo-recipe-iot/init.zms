@@ -1,0 +1,2 @@
+// Create users
+sudo 'IOT' call provisionning_iot();

@@ -1,0 +1,12 @@
+/*
+ *	This macroscript is used to return all services availables
+ *	Return an array of BeaconService
+*/
+macroscript getAllAvailableService(){
+	
+	// Get all services
+	var allServicesRequest = database.get({table : 'allBeaconServices', key : 'all'});
+	var allServices = allServicesRequest.result.services;
+	
+	
+} return { allServices } on channel __selfName

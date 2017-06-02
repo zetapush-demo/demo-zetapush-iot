@@ -1,0 +1,48 @@
+/**
+* Recipe com.zetapush.core.iot
+* Created on Tue Mar 21 15:01:16 CET 2017 by damien
+* Documentation in a source comment for a simple description
+*/
+recipe com.zetapush.core.iot 1.0.0;
+
+import recipe com.zetapush.core.webRTC 1.0.0 in apiWebRtc;
+import recipe com.zetapush.core.user 2.0.0 in apiUser;
+
+/** our code is run by this service */
+service code = macro(__default) for 'src';
+
+/** Database service */
+service database = gda('beacons');
+
+/** Group management service */
+service groupManagement = groups('groups_iot');
+
+/** 
+	Create the table for the beacon detections
+	The key is 'allBeacons'
+*/
+database.gda_createTable({
+	columns : [
+		{'name' : 'tabBeacons', 'type' : GdaDataType_OBJECT}
+	], name : 'allBeacons'
+});
+
+/** 
+	Create the table to match the url_beacon and the url_service
+	The key is the url of the beacon
+*/
+database.gda_createTable({
+	columns: [
+		{'name': 'urlService', 'type' : GdaDataType_OBJECT}
+	], name : 'matchUrlService'
+});
+
+/** 
+	Create the table to list all services with a description
+	The key is 'all'
+*/
+database.gda_createTable({
+	columns: [
+		{'name': 'services', 'type' : GdaDataType_OBJECT}
+	], name : 'allBeaconServices'
+});

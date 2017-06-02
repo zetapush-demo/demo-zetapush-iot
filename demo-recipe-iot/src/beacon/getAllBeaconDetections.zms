@@ -1,0 +1,13 @@
+/*
+ *	Macroscript called by the client to get all beacon detections
+*/
+macroscript getAllBeaconDetections() {
+	// Debug 
+	trace("getAllBeaconDetection", __userKey);
+	
+	var getFromDatabase = database.get({table : 'allBeacons', key : 'allBeacons'});
+	var tabOfAllBeacons = getFromDatabase.result.tabBeacons;
+	
+	trace(tabOfAllBeacons);
+
+} return { tabOfAllBeacons } on channel __selfName 

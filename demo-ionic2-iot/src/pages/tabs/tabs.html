@@ -1,0 +1,5 @@
+<ion-tabs>
+  <ion-tab [root]="tab1Root" (ionSelect)="selectDetection()" tabTitle="Detection" tabIcon="ios-radio-outline"></ion-tab>
+  <ion-tab [root]="tab2Root" (ionSelect)="selectBeaconConfiguration()" tabTitle="Beacon configuration" tabIcon="ios-build"></ion-tab>
+  <ion-tab [root]="tab3Root" (ionSelect)="selectWebRTC()" tabTitle="Web RTC" tabIcon="videocam"></ion-tab>
+</ion-tabs>

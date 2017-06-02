@@ -1,0 +1,22 @@
+/*
+ *	This macroscript is used to get the url service from the url of a beacon
+*/
+macroscript getServiceFromUrlBeacon(string urlBeacon){
+	
+	// Get the URL service
+	var urlServiceRequest = database.get({table : 'matchUrlService', key : urlBeacon});
+	var urlService = urlServiceRequest.result.urlService.url;
+	
+	// Get all service and return the proper service
+	var allServicesRequest = database.get({table : 'allBeaconServices', key : 'all'});
+	var allServices = allServicesRequest.result.services;
+	
+	var res = null;
+	
+	for s in allServices {
+		if (s.url == urlService){
+			res = s;
+		}
+	}
+	
+} return { res } on channel __selfName

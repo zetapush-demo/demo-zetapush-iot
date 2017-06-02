@@ -1,0 +1,19 @@
+/*
+ * This macroscript is used to match an URL service with an URL beacon
+*/
+macroscript setServiceFromUrlBeacon(string nameService, string urlBeacon){
+	
+	// Get all service and return the proper service
+	var allServicesRequest = database.get({table : 'allBeaconServices', key : 'all'});
+	var allServices = allServicesRequest.result.services;
+	
+	var properService = null;
+	for s in allServices {
+		if (s.name == nameService){
+			properService = s;
+		}
+	}
+	
+	// Match the service with the URL beacon
+	database.put({table : 'matchUrlService', data : properService, key : urlBeacon, column : 'urlService'});	
+}

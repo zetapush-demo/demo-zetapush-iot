@@ -1,0 +1,20 @@
+/*
+ *	This macroscript is used to add a new service in the database
+*/
+macroscript setNewService(string name, string url, string description){
+	
+	// Create the service object
+	var newService = {
+		'name': name,
+		'url': url,
+		'description': description
+	};
+	
+	// Add the new service to the array of all service
+	var allServicesRequest = database.get({table : 'allBeaconServices', key : 'all'});
+	var allServices = allServicesRequest.result.services;
+	allServices = list:add(allServices, newService);
+	
+	// Put all services in the database
+	database.put({table : 'allBeaconServices', data : allServices, key : 'all', column : 'services'});	
+}

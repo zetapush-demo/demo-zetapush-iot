@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Web RTC
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div>
+    <video id="localVideo" height="125" autoplay></video>
+
+    <div id="buttons">
+      <button id="btnSwitchConnection" ion-button (click)="switchConnection()">{{stateConnection}}</button>
+      <button id="btnView" ion-button (click)="changeView()">Change view</button>
+    </div>
+  </div>
+
+  <video id="remoteVideo" height="250" width="250" autoplay></video>
+
+</ion-content>

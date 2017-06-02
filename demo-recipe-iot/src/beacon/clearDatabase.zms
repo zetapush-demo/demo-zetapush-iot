@@ -1,0 +1,6 @@
+/*
+ *	Macroscript used to clean the database
+*/
+macroscript clearDatabase(){
+	database.removeRow({table: 'allBeacons', key : 'allBeacons'});
+}

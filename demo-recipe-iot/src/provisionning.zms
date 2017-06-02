@@ -1,0 +1,21 @@
+macroscript provisionning_iot() {
+	
+	
+	// Create group
+	groupManagement.delGroup({group : 'detection'});
+	groupManagement.createGroup({group : 'detection', groupName : 'detection'});
+	
+	// Add permissions to the user group
+	groupManagement.mgrant({
+		resource : str:join(':', __userKey, 'detection'), 
+		actions : ['LIST'], 
+		group : 'detection'
+	});
+	
+	groupManagement.mgrant({
+		resource : str:join(':',database,  __userKey, '*'), 
+		actions : [Verb_gda_get, Verb_gda_put, Verb_gda_removeRow], 
+		group : 'detection'
+	});
+	
+}

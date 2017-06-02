@@ -1,0 +1,37 @@
+/*
+ * Macroscript called to add or update the beacon in the database.
+*/
+macroscript addToGDADatabase(number timestamp, string data, number distance, string device){
+	
+	var alreadyPresent = false;
+	
+	// Get the array of beacon detections
+	var getArrayBeaconDetections = database.get({table : 'allBeacons', key : 'allBeacons'});
+	var tabOfBeaconDetections = getArrayBeaconDetections.result.tabBeacons;
+	
+	// Range the tab of all beacons and update if is necessary
+	for b in tabOfBeaconDetections {
+		trace(b);
+		if (b.data == data && b.device == device){						// In this case : beacon detection already present => update
+			b.distance = distance;
+			b.timestamp = timestamp;
+			alreadyPresent = true;
+		}
+	}
+	
+	// If the beacon detection is not already in the database, we add it
+	if (!alreadyPresent){
+		var beaconDetection = {
+			data: data,
+			distance: distance,
+			timestamp: timestamp,
+			device: device
+		};
+		
+		// Add the new beaconDetection in the tab of beacon detections
+		tabOfBeaconDetections = list:add(tabOfBeaconDetections, beaconDetection);
+	}
+	
+	// Update BDD
+	database.put({table : 'allBeacons', data : tabOfBeaconDetections, key : 'allBeacons', column : 'tabBeacons'});
+}
